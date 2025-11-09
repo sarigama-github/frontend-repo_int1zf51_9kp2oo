@@ -1,10 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import QuoteCard from "./components/QuoteCard";
 import Chart from "./components/Chart";
 
-const BACKEND = import.meta.env.VITE_BACKEND_URL || "";
+// Backend base URL: prefer env, else derive from current host on port 8000
+const BACKEND =
+  import.meta.env.VITE_BACKEND_URL ||
+  `${window.location.protocol}//${window.location.hostname}:8000`;
 
 async function fetchJSON(url) {
   const res = await fetch(url);
@@ -24,8 +27,11 @@ export default function App() {
     setError("");
     setLoadingQuote(true);
     setLoadingSeries(true);
+
     try {
-      const q = await fetchJSON(`${BACKEND}/api/stocks/quote?symbol=${encodeURIComponent(sym)}`);
+      const q = await fetchJSON(
+        `${BACKEND}/api/stocks/quote?symbol=${encodeURIComponent(sym)}`
+      );
       setQuote(q);
     } catch (e) {
       setError("Could not load quote. Try another symbol.");
@@ -35,7 +41,11 @@ export default function App() {
     }
 
     try {
-      const s = await fetchJSON(`${BACKEND}/api/stocks/intraday?symbol=${encodeURIComponent(sym)}&interval=5m`);
+      const s = await fetchJSON(
+        `${BACKEND}/api/stocks/intraday?symbol=${encodeURIComponent(
+          sym
+        )}&interval=5m`
+      );
       setSeries(s);
     } catch (e) {
       setSeries({ symbol: sym, points: [] });
@@ -50,8 +60,10 @@ export default function App() {
   }, []);
 
   const onSearch = (sym) => {
-    setSymbol(sym);
-    load(sym);
+    const s = sym.trim().toUpperCase();
+    if (!s) return;
+    setSymbol(s);
+    load(s);
   };
 
   return (

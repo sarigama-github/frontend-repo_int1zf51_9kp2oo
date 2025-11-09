@@ -3,12 +3,12 @@
 > vite
 
 
-  VITE v5.4.20  ready in 343 ms
+  VITE v5.4.20  ready in 326 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.20.7.207:3000/
-1:02:37 PM [vite] Pre-transform error: Failed to resolve import "chartjs-adapter-date-fns" from "src/components/Chart.jsx". Does the file exist?
-1:04:33 PM [vite] Internal server error: Failed to resolve import "chartjs-adapter-date-fns" from "src/components/Chart.jsx". Does the file exist?
+1:08:08 PM [vite] Pre-transform error: Failed to resolve import "chartjs-adapter-date-fns" from "src/components/Chart.jsx". Does the file exist?
+1:08:09 PM [vite] Internal server error: Failed to resolve import "chartjs-adapter-date-fns" from "src/components/Chart.jsx". Does the file exist?
   Plugin: vite:import-analysis
   File: /home/workspace/src/components/Chart.jsx:13:7
   12 |    TimeScale
